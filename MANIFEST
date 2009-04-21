@@ -16,8 +16,10 @@ inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/DateTime/TimeZone/HPUX.pm
 lib/DateTime/TimeZone/Local/hpux.pm
+Makefile
 Makefile.PL
 MANIFEST
+MANIFEST.SKIP
 META.yml
 README
 t/00-load.t

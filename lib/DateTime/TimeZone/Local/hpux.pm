@@ -85,13 +85,20 @@ sub FromEtcTIMEZONE
         # A known timezone that we map to the Olson DB name
         if (exists $tztab_to_Olson{$tz}) {
             $tz = $tztab_to_Olson{$tz};
+        } elsif ($tz =~ /^GMT([+-])([1-9]?\d(?::(\d{2}))?)$/) {
+            my ($sign, $offset) = ($1, $2, $3);
+            $offset = '0' . $offset if length $offset < 2;
+            $offset .= '00' if length $offset == 2;
+            $tz = $sign . $offset;
         # A timezone without DST
-        } elsif ($tz =~ /^([A-Z]+)(-?)([1-9]?\d(?::(\d{2}))?)$/) {
-            eval { use DateTime::TimeZone::OffsetOnly; };
+        } elsif ($tz =~ /^([A-Z]{3,})(-?)([1-9]?\d(?::(\d{2}))?)$/) {
             my ($name, $sign, $offset) = ($1, $2, $3);
+            $offset = '0' . $offset if length $offset < 2;
+            $offset .= '00' if length $offset == 2;
+            # Build a TZ with DT::TZ::OffsetOnly
             # Signs are reversed
-            $offset = ($sign eq '-' ? '+' : '-') . $offset;
-            return DateTime::TimeZone::OffsetOnly->new(name => $offset);
+            #$tz = ($sign eq '-' ? '+' : '-') . $offset . (length $offset > 2 ? '' : '00');
+            $tz = ($sign eq '-' ? '+' : '-') . $offset;
         # An unknown timezone with DST
         } elsif ($tz =~ /^([A-Z]+)-?[1-9]?[0-9]/) {
             # TODO build a TimeZone object from the tztab content
@@ -113,7 +120,7 @@ DateTime::TimeZone::Local::hpux - Local timezone detection for HP-UX
 
 =head1 VERSION
 
-$Id: hpux.pm,v 1.2 2009/04/20 15:12:37 omengue Exp $
+$Id: hpux.pm,v 1.2 2009/04/21 16:47:06 omengue Exp $
 
 =head1 SYNOPSIS
 
