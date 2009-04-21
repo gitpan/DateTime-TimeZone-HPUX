@@ -17,7 +17,7 @@
 #     NO_META => q[1]
 #     PL_FILES => {  }
 #     PREREQ_PM => { DateTime::TimeZone=>q[0.87], Test::More=>q[0], ExtUtils::MakeMaker=>q[6.42] }
-#     VERSION => q[0.02]
+#     VERSION => q[0.03]
 #     dist => { PREOP=>q[$(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"] }
 #     realclean => { FILES=>q[MYMETA.yml] }
 #     test => { TESTS=>q[t/00-load.t t/boilerplate.t t/pod-coverage.t t/pod.t] }
@@ -59,11 +59,11 @@ DIRFILESEP = \\
 DFSEP = $(DIRFILESEP)
 NAME = DateTime::TimeZone::HPUX
 NAME_SYM = DateTime_TimeZone_HPUX
-VERSION = 0.02
+VERSION = 0.03
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_02
+VERSION_SYM = 0_03
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.02
+XS_VERSION = 0.03
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib\arch
@@ -255,7 +255,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = DateTime-TimeZone-HPUX
-DISTVNAME = DateTime-TimeZone-HPUX-0.02
+DISTVNAME = DateTime-TimeZone-HPUX-0.03
 
 
 # --- MakeMaker macro section:
@@ -763,7 +763,7 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) "<SOFTPKG NAME=\"$(DISTNAME)\" VERSION=\"0,02,0,0\">" > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "<SOFTPKG NAME=\"$(DISTNAME)\" VERSION=\"0,03,0,0\">" > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) "    <TITLE>$(DISTNAME)</TITLE>" >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) "    <ABSTRACT></ABSTRACT>" >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) "    <AUTHOR>Olivier Mengué &lt;dolmen@cpan.org&gt;</AUTHOR>" >> $(DISTNAME).ppd

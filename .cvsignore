@@ -12,3 +12,4 @@ META.yml
 DateTime-TimeZone-HPUX-*
 MANIFEST
 inc
+pm_to_blib
