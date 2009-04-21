@@ -1,0 +1,14 @@
+*~
+*.swp
+*.bak
+blib*
+Makefile
+Makefile.old
+Makefile.PL
+*.tar.gz
+.lwpcookies
+cover_db
+META.yml
+DateTime-TimeZone-HPUX-*
+MANIFEST
+inc
