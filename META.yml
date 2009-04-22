@@ -1,5 +1,5 @@
 ---
-abstract: ~
+abstract: 'Handles timezones defined at the operating system level on HP-UX'
 author:
   - 'Olivier Mengué <dolmen@cpan.org>'
 build_requires:
@@ -22,4 +22,4 @@ requires:
   DateTime::TimeZone: 0.87
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.03
+version: 0.04

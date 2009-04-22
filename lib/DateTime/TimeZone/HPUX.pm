@@ -1,16 +1,23 @@
 package DateTime::TimeZone::HPUX;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 1;
 
 =head1 NAME
 
-DateTime::TimeZone::HPUX
+DateTime::TimeZone::HPUX - Handles timezones defined at the operating system level on HP-UX
+
+=head1 SYNOPSIS
+
+On an HP-UX system:
+
+    my $tz = DateTime::TimeZone->new(name => 'local');
 
 =head1 SEE ALSO
 
-L<DateTime::TimeZone::Local::hpux>
+L<DateTime::TimeZone::Local::hpux> - Local timezone detection for HP-UX
+(bundled in this distribution)
 
 =head1 AUTHOR
 
@@ -23,8 +30,6 @@ or through the web interface at
 L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DateTime-TimeZone-HPUX>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
-
-
 
 
 =head1 SUPPORT

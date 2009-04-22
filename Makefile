@@ -10,6 +10,7 @@
 #
 #   MakeMaker Parameters:
 
+#     ABSTRACT => q[Handles timezones defined at the operating system level on HP-UX]
 #     AUTHOR => q[Olivier Mengué <dolmen@cpan.org>]
 #     DIR => []
 #     DISTNAME => q[DateTime-TimeZone-HPUX]
@@ -17,7 +18,7 @@
 #     NO_META => q[1]
 #     PL_FILES => {  }
 #     PREREQ_PM => { DateTime::TimeZone=>q[0.87], Test::More=>q[0], ExtUtils::MakeMaker=>q[6.42] }
-#     VERSION => q[0.03]
+#     VERSION => q[0.04]
 #     dist => { PREOP=>q[$(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"] }
 #     realclean => { FILES=>q[MYMETA.yml] }
 #     test => { TESTS=>q[t/00-load.t t/boilerplate.t t/pod-coverage.t t/pod.t] }
@@ -59,11 +60,11 @@ DIRFILESEP = \\
 DFSEP = $(DIRFILESEP)
 NAME = DateTime::TimeZone::HPUX
 NAME_SYM = DateTime_TimeZone_HPUX
-VERSION = 0.03
+VERSION = 0.04
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_03
+VERSION_SYM = 0_04
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.03
+XS_VERSION = 0.04
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib\arch
@@ -255,7 +256,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = DateTime-TimeZone-HPUX
-DISTVNAME = DateTime-TimeZone-HPUX-0.03
+DISTVNAME = DateTime-TimeZone-HPUX-0.04
 
 
 # --- MakeMaker macro section:
@@ -763,9 +764,9 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) "<SOFTPKG NAME=\"$(DISTNAME)\" VERSION=\"0,03,0,0\">" > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "<SOFTPKG NAME=\"$(DISTNAME)\" VERSION=\"0,04,0,0\">" > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) "    <TITLE>$(DISTNAME)</TITLE>" >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) "    <ABSTRACT></ABSTRACT>" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "    <ABSTRACT>Handles timezones defined at the operating system level on HP-UX</ABSTRACT>" >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) "    <AUTHOR>Olivier Mengué &lt;dolmen@cpan.org&gt;</AUTHOR>" >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) "    <IMPLEMENTATION>" >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) "        <DEPENDENCY NAME=\"DateTime-TimeZone\" VERSION=\"0,87,0,0\" />" >> $(DISTNAME).ppd

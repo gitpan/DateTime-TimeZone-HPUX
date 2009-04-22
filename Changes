@@ -1,12 +1,14 @@
 Revision history for DateTime-TimeZone-HPUX
 
-0.03    2009-04-21 19:19 +0200
+0.04    2009-04-22 11:45 +0200 (METDST)
+        Documentation fixes.
+
+0.03    2009-04-21 19:23:53 +0200 (METDST)
         Removed the special case for "GMT+x" as it does not match the OS behavior.
 
-0.02    2009-04-21 18:49 +0200
+0.02    2009-04-21 18:59:22 +0200 (METDST)
         Added parsing of GMT based offset such as "GMT+3" => +0300.
         Fixed parsing of unknown offset such as "SAT4" => -0400.
 
-0.01    2009-04-21 15:02:33 +0200
+0.01    2009-04-21 15:02:33 +0200 (METDST)
         First version, released on an unsuspecting world.
-        

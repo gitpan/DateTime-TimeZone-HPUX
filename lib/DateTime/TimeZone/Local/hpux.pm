@@ -116,7 +116,7 @@ DateTime::TimeZone::Local::hpux - Local timezone detection for HP-UX
 
 =head1 VERSION
 
-$Id: hpux.pm,v 1.3 2009/04/21 17:20:37 omengue Exp $
+$Id: hpux.pm,v 1.4 2009/04/22 09:40:49 omengue Exp $
 
 =head1 SYNOPSIS
 
@@ -128,7 +128,7 @@ The fix for bug RT#44724 must have been applied (fixed in DateTime::TimeZone 0.8
 
 =over 4
 
-=item C<man 5 tztab)>
+=item C<man 4 tztab>
 
 =item C</usr/lib/tztab>
 
