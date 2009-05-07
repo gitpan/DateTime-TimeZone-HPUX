@@ -1,9 +1,11 @@
 ^Build.bat$
 ^Build$
+^Makefile$
 ^_build\b
 ^blib\b
 ^cover_db\b
 ^pm_to_blib\b
+^inc\b
 ~$
 \.swp$
 \.bak$

@@ -1,25 +1,24 @@
 ---
-abstract: 'Handles timezones defined at the operating system level on HP-UX'
+name: DateTime-TimeZone-HPUX
+version: 0.05
 author:
   - 'Olivier Mengué <dolmen@cpan.org>'
-build_requires:
-  ExtUtils::MakeMaker: 6.42
-  Test::More: 0
-configure_requires:
-  ExtUtils::MakeMaker: 6.42
-distribution_type: module
-generated_by: 'Module::Install version 0.85'
+abstract: Handles timezones defined at the operating system level on HP-UX
 license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+requires:
+  DateTime: 0
+  DateTime::TimeZone: '>=0.87'
+build_requires:
+  Test::More: 0
+provides:
+  DateTime::TimeZone::HPUX:
+    file: lib/DateTime/TimeZone/HPUX.pm
+    version: 0.05
+  DateTime::TimeZone::Local::hpux:
+    file: lib/DateTime/TimeZone/Local/hpux.pm
+generated_by: Module::Build version 0.33
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-name: DateTime-TimeZone-HPUX
-no_index:
-  directory:
-    - inc
-    - t
-requires:
-  DateTime::TimeZone: 0.87
-resources:
-  license: http://dev.perl.org/licenses/
-version: 0.04
