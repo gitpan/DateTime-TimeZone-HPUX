@@ -1,6 +1,10 @@
 *~
 *.swp
 *.bak
+*.tmp
+Build.bat
+Build
+_build
 blib*
 Makefile
 Makefile.old

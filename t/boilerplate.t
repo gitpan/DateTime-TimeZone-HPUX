@@ -54,9 +54,8 @@ TODO: {
     "placeholder date/time"       => qr(Date/time)
   );
 
-  module_boilerplate_ok('lib\DateTime\TimeZone\Local\hpux.pm');
-  module_boilerplate_ok('lib\DateTime\TimeZone\HPUX.pm');
+  module_boilerplate_ok('lib/DateTime/TimeZone/Local/hpux.pm');
+  module_boilerplate_ok('lib/DateTime/TimeZone/HPUX.pm');
 
 
 }
-

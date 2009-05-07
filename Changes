@@ -1,9 +1,12 @@
 Revision history for DateTime-TimeZone-HPUX
 
-0.05    2009-05-06 11:24 +0200 (METDST)
+0.06    2009-05-07 19:37:00 +0200 (METDST)
+        Fixed t/boilerplate.t.
+
+0.05    2009-05-07 11:26:28 +0200 (METDST)
         Switching to Module::Build from Module::Install due to archive
-        creation problems. See http://use.perl.org/~bart/journal/38127
-	This should fix CPAN indexing.
+        creation problems on Win32. See http://use.perl.org/~bart/journal/38127
+        This should fix CPAN indexing.
 
 0.04    2009-04-22 11:45:56 +0200 (METDST)
         Documentation fixes.
