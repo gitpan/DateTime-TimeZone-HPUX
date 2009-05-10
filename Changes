@@ -1,6 +1,11 @@
 Revision history for DateTime-TimeZone-HPUX
 
-0.06    2009-05-07 19:37:00 +0200 (METDST)
+0.07    2009-05-10 14:21:00 +0200 (METDST)
+        Fixed pod to make pod-coverage.t pass.
+        Added tests.
+        Removed DateTime from dependencies.
+
+0.06    2009-05-07 19:39:05 +0200 (METDST)
         Fixed t/boilerplate.t.
 
 0.05    2009-05-07 11:26:28 +0200 (METDST)

@@ -13,5 +13,8 @@ META.yml
 README
 t/00-load.t
 t/boilerplate.t
+t/local-env.t
+t/local-etc-timezone.t
+t/local-METDST.t
 t/pod-coverage.t
 t/pod.t

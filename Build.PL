@@ -6,12 +6,11 @@ use warnings;
 
 use Module::Build;
 
-my $builder = Module::Build->new(
+Module::Build->new(
     module_name         => 'DateTime::TimeZone::HPUX',
     dist_author         => 'Olivier Mengué <dolmen@cpan.org>',
     license             => 'perl',
     requires => {
-        'DateTime' => 0,
         'DateTime::TimeZone' => '>=0.87',
     },
     build_requires => {
@@ -19,6 +18,4 @@ my $builder = Module::Build->new(
     },
     add_to_cleanup => [ 'cover_db', '*~', '.*~', 'Makefile', 'MANIFEST.bak' ],
     create_makefile_pl => 'traditional',
-);
-
-$builder->create_build_script();
+)->create_build_script();

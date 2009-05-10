@@ -5,18 +5,19 @@ use warnings;
 
 use base 'DateTime::TimeZone::Local';
 
+
 sub Methods
 {
-    qw( FromEnv FromEtcTIMEZONE )
+    qw( _FromEnv _FromEtcTIMEZONE )
 }
 
 # TODO Build the full timezone database from /usr/lib/tztab
-sub FromEnv
+sub _FromEnv
 {
-    tztab_to_Olson($ENV{TZ})
+    _tztab_to_Olson($ENV{TZ})
 }
 
-sub FromEtcTIMEZONE
+sub _FromEtcTIMEZONE
 {
     # Borrowed from DateTime::TimeZone::Local::Unix
 
@@ -39,7 +40,7 @@ sub FromEtcTIMEZONE
     }
     close TZ;
 
-    return tztab_to_Olson($name);
+    return _tztab_to_Olson($name);
 }
 
 
@@ -51,7 +52,7 @@ sub FromEtcTIMEZONE
     # grep '^[A-Z#]' /usr/lib/tztab
     my %tztab_to_Olson = (
         'MET-1METDST' => 'Europe/Paris',
-        'AST4' => 'America/Guadeloupe',
+        'AST4' => 'America/Guadeloupe', # Also America/Martinique
         'GFT3' => 'America/Cayenne',
         'EAT-3' => 'Indian/Mayotte',
         'RET-4' => 'Indian/Reunion',
@@ -79,7 +80,7 @@ sub FromEtcTIMEZONE
         'WST-12WSTDST' => 'Asia/Kamchatka',
     );
 
-    sub tztab_to_Olson
+    sub _tztab_to_Olson
     {
         my $tz = shift;
         # A known timezone that we map to the Olson DB name
@@ -123,6 +124,12 @@ $Id: hpux.pm,v 1.4 2009/04/22 09:40:49 omengue Exp $
 This is a workaround for bug RT#44721.
 
 The fix for bug RT#44724 must have been applied (fixed in DateTime::TimeZone 0.87).
+
+=head1 METHODS
+
+=head2 Methods()
+
+See L<DateTime::TimeZone::Local>
 
 =head1 SEE ALSO
 
