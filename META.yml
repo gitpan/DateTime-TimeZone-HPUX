@@ -1,6 +1,6 @@
 ---
 name: DateTime-TimeZone-HPUX
-version: 0.07
+version: 0.08
 author:
   - 'Olivier Mengué <dolmen@cpan.org>'
 abstract: Handles timezones defined at the operating system level on HP-UX
@@ -14,7 +14,7 @@ build_requires:
 provides:
   DateTime::TimeZone::HPUX:
     file: lib/DateTime/TimeZone/HPUX.pm
-    version: 0.07
+    version: 0.08
   DateTime::TimeZone::Local::hpux:
     file: lib/DateTime/TimeZone/Local/hpux.pm
 generated_by: Module::Build version 0.33

@@ -117,7 +117,7 @@ DateTime::TimeZone::Local::hpux - Local timezone detection for HP-UX
 
 =head1 VERSION
 
-$Id: hpux.pm,v 1.4 2009/04/22 09:40:49 omengue Exp $
+$Id: hpux.pm,v 1.5 2009/05/11 08:05:09 omengue Exp $
 
 =head1 SYNOPSIS
 

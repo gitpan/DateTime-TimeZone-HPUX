@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 7;
+use Test::More tests => 9;
 
 # Simulate locale environment
 local $^O = 'hpux';
@@ -14,6 +14,10 @@ isa_ok( $tz1, 'DateTime::TimeZone' );
 my $tz2 = DateTime::TimeZone->new( name => 'Europe/Paris' ); 
 isa_ok( $tz2, 'DateTime::TimeZone' );
 is( $tz1->has_dst_changes, $tz2->has_dst_changes(), 'DST changes' );
+
+my $tz3 = DateTime::TimeZone->new( name => $tz1->name );
+isa_ok( $tz3, 'DateTime::TimeZone' );
+is( $tz3, $tz1, "Can recreate object from name");
 
 
 SKIP: {
