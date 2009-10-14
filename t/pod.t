@@ -3,6 +3,7 @@
 # Test that the syntax of our POD documentation is valid
 
 use strict;
+use warnings;
 BEGIN {
 	$|  = 1;
 	$^W = 1;

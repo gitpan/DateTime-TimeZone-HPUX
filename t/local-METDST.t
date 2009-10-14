@@ -1,17 +1,22 @@
 use strict;
 use warnings;
 
-use Test::More tests => 9;
+use Test::More tests => 11;
 
+BEGIN {
 # Simulate locale environment
-local $^O = 'hpux';
-local $ENV{TZ} = 'MET-1METDST';
+    $^O = 'hpux';
+    $ENV{TZ} = 'MET-1METDST';
+}
 
 use DateTime::TimeZone;
 
+is($ENV{TZ}, 'MET-1METDST');
+is($^O, 'hpux');
+
 my $tz1 = DateTime::TimeZone->new( name => 'local' );
 isa_ok( $tz1, 'DateTime::TimeZone' );
-my $tz2 = DateTime::TimeZone->new( name => 'Europe/Paris' ); 
+my $tz2 = DateTime::TimeZone->new( name => 'Europe/Paris' );
 isa_ok( $tz2, 'DateTime::TimeZone' );
 is( $tz1->has_dst_changes, $tz2->has_dst_changes(), 'DST changes' );
 

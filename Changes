@@ -1,5 +1,22 @@
 Revision history for DateTime-TimeZone-HPUX
 
+1.00    2009-10-14 19:00:00 +0200 (METDST)
+        Now using Java to retrieve an hopefully complete mapping of tztab(4)
+          names to Olson DB. See the 'Implementation' section in
+          DateTime::TimeZone::HPUX for details.
+        Added JavaMap.PL which extracts the mapping from the JRE at module
+          install time. A default map is bundled in case no JRE is found.
+        In extreme cases, Java may be called at runtime for timezones which
+          were not known at install time.
+
+0.09    2009-05-24
+        Changed tests:
+        - removed t/boilerplate.t (used only to help the author to fix
+          Module::Starter generated content)
+        - t/local-METDST.t: moved environment setting to a BEGIN block
+          (this may fix CPAN testers failures on some perls)
+        Not released on CPAN.
+
 0.08    2009-05-13 16:15:00 +0200 (METDST)
         Fixed issue with _FromEtcTimeZone on HP-UX.
         Reporting result with diag() in t/local-*.t.

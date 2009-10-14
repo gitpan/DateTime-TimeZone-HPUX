@@ -3,23 +3,32 @@ package DateTime::TimeZone::Local::hpux;
 use strict;
 use warnings;
 
-use base 'DateTime::TimeZone::Local';
+# Debugging flags, used in the testsuite
+BEGIN {
+    defined &SKIP_ETC_TIMEZONE or *SKIP_ETC_TIMEZONE = sub () { 0 };
+    defined &SKIP_JAVA or *SKIP_JAVA = sub () { 0 };
+}
 
+
+
+use base 'DateTime::TimeZone::Local';
+use DateTime::TimeZone::HPUX;
 
 sub Methods
 {
-    qw( _FromEnv _FromEtcTIMEZONE )
+    qw( _FromEnv _FromEtcTIMEZONE _FromJava )
 }
 
 # TODO Build the full timezone database from /usr/lib/tztab
 sub _FromEnv
 {
-    _tztab_to_Olson($ENV{TZ})
+    return unless exists $ENV{TZ};
+    DateTime::TimeZone::HPUX::_hpux_to_olson($ENV{TZ})
 }
 
 sub _FromEtcTIMEZONE
 {
-    # Borrowed from DateTime::TimeZone::Local::Unix
+    return if SKIP_ETC_TIMEZONE;
 
     my $tz_file = '/etc/TIMEZONE';
 
@@ -40,73 +49,22 @@ sub _FromEtcTIMEZONE
     }
     close TZ;
 
-    return _tztab_to_Olson($name);
+    DateTime::TimeZone::HPUX::_hpux_to_olson($name)
 }
 
-
-
+# Retrieve the default timezone using Java (java.util.TimeZone.getDefault())
+sub _FromJava
 {
-    # See settimezone() in /etc/dce_config for a basic map
-    # sed -n '/"[A-Z].*tzfile=/ s/^.*"\([^"]*\)".*"\([^"]*\)".*$/		'\''\1'\'' => '\''\2'\''/p' /etc/dce_config
-    # See also:
-    # grep '^[A-Z#]' /usr/lib/tztab
-    my %tztab_to_Olson = (
-        'MET-1METDST' => 'Europe/Paris',
-        'AST4' => 'America/Guadeloupe', # Also America/Martinique
-        'GFT3' => 'America/Cayenne',
-        'EAT-3' => 'Indian/Mayotte',
-        'RET-4' => 'Indian/Reunion',
-        'GAMT-9' => 'Pacific/Gambier',
-        'MART-9:30' => 'Pacific/Marquesas',
-        'NCT-11' => 'Pacific/Noumea',
-        'TAHT10' => 'Pacific/Tahiti',
-        'PMST3PMDT' => 'America/Miquelon',
-        'WET0WETDST' => 'Europe/Lisbon',
-        'PWT0PST' => 'Europe/Lisbon',
-        'GMT0BST' => 'Europe/London',
-        'PST8PDT' => 'PST',
-        'YST9YDT' => 'America/Whitehorse',
-        'SAST-2' => 'Africa/Johannesburg',
-        'WST-3WSTDST' => 'Europe/Moscow',
-        'WST-2WSTDST' => 'Europe/Minsk',
-        'WST-4WSTDST' => 'Europe/Samara',
-        'WST-5WSTDST' => 'Asia/Yekaterinburg',
-        'WST-6WSTDST' => 'Asia/Omsk',
-        'WST-7WSTDST' => 'Asia/Krasnoyarsk',
-        'WST-8WSTDST' => 'Asia/Irkutsk',
-        'WST-9WSTDST' => 'Asia/Yakutsk',
-        'WST-10WSTDST' => 'Asia/Vladivostok',
-        'WST-11WSTDST' => 'Asia/Magadan',
-        'WST-12WSTDST' => 'Asia/Kamchatka',
-    );
+    return if SKIP_JAVA;
+    warn('Retrieving default timezone using Java (SLOOOOOW)... You should instead set $ENV{TZ}');
+    my $tz_name = DateTime::TimeZone::HPUX::_olson_from_java();
+    return unless defined $tz_name;
 
-    sub _tztab_to_Olson
-    {
-        my $tz = shift;
-        # A known timezone that we map to the Olson DB name
-        if (exists $tztab_to_Olson{$tz}) {
-            $tz = $tztab_to_Olson{$tz};
-        # A timezone without DST
-        # Note that GMT+5 gives -0500 as it is how HP-UX handles it
-        } elsif ($tz =~ /^([A-Z]{3,})(-?)([1-9]?\d(?::(\d{2}))?)$/) {
-            my ($name, $sign, $offset) = ($1, $2, $3);
-            $offset = '0' . $offset if length $offset < 2;
-            $offset .= '00' if length $offset == 2;
-            # Build a TZ with DT::TZ::OffsetOnly
-            # Signs are reversed
-            #$tz = ($sign eq '-' ? '+' : '-') . $offset . (length $offset > 2 ? '' : '00');
-            $tz = ($sign eq '-' ? '+' : '-') . $offset;
-        # An unknown timezone with DST
-        } elsif ($tz =~ /^([A-Z]+)-?[1-9]?[0-9]/) {
-            # TODO build a TimeZone object from the tztab content
-            $tz = $1;
-        } else {
-            return;
-        }
-        local $@;
-        return eval { DateTime::TimeZone->new(name => $tz) };
-    }
+    # Build a DT::TZ object from the name returned by Java
+    local $@;
+    return eval { DateTime::TimeZone->new(name => $tz_name) };
 }
+
 
 1;
 __END__
@@ -117,7 +75,7 @@ DateTime::TimeZone::Local::hpux - Local timezone detection for HP-UX
 
 =head1 VERSION
 
-$Id: hpux.pm,v 1.5 2009/05/11 08:05:09 omengue Exp $
+$Id: hpux.pm,v 1.7 2009/10/14 17:29:04 omengue Exp $
 
 =head1 SYNOPSIS
 
