@@ -75,27 +75,41 @@ DateTime::TimeZone::Local::hpux - Local timezone detection for HP-UX
 
 =head1 VERSION
 
-$Id: hpux.pm,v 1.7 2009/10/14 17:29:04 omengue Exp $
+$Id: hpux.pm,v 1.8 2009/10/15 13:17:25 omengue Exp $
 
 =head1 SYNOPSIS
 
-This is a workaround for bug RT#44721.
+On an HP-UX system (C<$^O eq 'hpux'>):
 
-The fix for bug RT#44724 must have been applied (fixed in DateTime::TimeZone 0.87).
+    use DateTime::TimeZone;
+
+    my $tz = DateTime::TimeZone(name => 'local');
+
+=head1 DESCRIPTION
+
+This module is automatically loaded by L<DateTime::TimeZone::Local> on HP-UX
+systems, based on the C<$^O> value (the fix for bug RT#44724 must have been applied (fixed in DateTime::TimeZone 0.87)).
+
+This is a workaround for bug RT#44721.
 
 =head1 METHODS
 
+As a subclass of DateTime::TimeZone::Local, the following methods are
+overridden:
+
 =head2 Methods()
 
-See L<DateTime::TimeZone::Local>
+See L<DateTime::TimeZone::Local/SUBCLASSING>.
 
 =head1 SEE ALSO
 
 =over 4
 
+=item L<DateTime::TimeZone::HPUX/CAVEAT>.
+
 =item C<man 4 tztab>
 
-=item C</usr/lib/tztab>
+=item F</usr/lib/tztab>
 
 =item L<http://rt.cpan.org/Public/Bug/Display.html?id=44721>
 
@@ -105,66 +119,17 @@ See L<DateTime::TimeZone::Local>
 
 =head1 BUGS
 
-The current implementation is simply a hard coded mapping between the tztab
-I found on my system to the Olson DB. This means that the TimeZone returned
-may not directly match the definition in /usr/lib/tztab.
-I consider this as a feature as DateTime::TimeZone is actively maintained,
-probaly much more than your local tztab.
-
+See L<DateTime::TimeZone::HPUX/BUGS>.
 
 =head1 AUTHOR
 
 Olivier MenguE<eacute>, C<< <dolmen at cpan.org> >>
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-datetime-timezone-hpux at rt.cpan.org>,
-or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DateTime-TimeZone-HPUX>.
-I will be notified, and then you'll automatically be notified of progress on
-your bug as I make changes.
-
-
-
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc DateTime::TimeZone::Local::hpux
-
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=DateTime-TimeZone-HPUX>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/DateTime-TimeZone-HPUX>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/DateTime-TimeZone-HPUX>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/DateTime-TimeZone-HPUX/>
-
-=back
-
-
-=head1 ACKNOWLEDGEMENTS
-
-
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Olivier MenguE<eacute>, all rights reserved.
+Copyright 2009 Olivier MenguE<eacute>.
 
 This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+under the same terms as Perl 5.10.0 itself.
 
 =cut

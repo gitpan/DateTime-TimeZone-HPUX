@@ -19,7 +19,7 @@ my $build = Module::Build->new(
         'File::Basename' => 0,
     },
     PL_files => {
-	'JavaMap.PL' => 'lib/DateTime/TimeZone/HPUX/JavaMap.pm',
+	'JavaMap.PL' => 'lib/DateTime/TimeZone/HPUX/Map.pm',
     },
     add_to_cleanup => [ 'cover_db', '*~', '.*~', 'Makefile', 'MANIFEST.bak' ],
     create_makefile_pl => 'traditional',

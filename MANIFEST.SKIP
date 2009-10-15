@@ -15,4 +15,4 @@
 DateTime-TimeZone-HPUX-*
 ^tztab$
 ^java/TZ.class$
-^lib/DateTime/TimeZone/HPUX/JavaMap.pm$
+^lib/DateTime/TimeZone/HPUX/Map.pm$

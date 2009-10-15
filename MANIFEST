@@ -4,7 +4,7 @@
 .settings/org.eclipse.core.resources.prefs
 Build.PL
 Changes
-inc/DefaultJavaMap.pm
+inc/DefaultMap.pm
 java/Makefile
 java/map.sh
 java/TZ.java
@@ -13,8 +13,10 @@ lib/DateTime/TimeZone/HPUX.pm
 lib/DateTime/TimeZone/HPUX/.cvsignore
 lib/DateTime/TimeZone/HPUX/TZ.class
 lib/DateTime/TimeZone/Local/hpux.pm
+Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
+META.yml
 README
 t/00-load.t
 t/local-env.t
@@ -23,5 +25,4 @@ t/local-java.t
 t/local-METDST.t
 t/pod-coverage.t
 t/pod.t
-Makefile.PL
-META.yml
+t/version.t

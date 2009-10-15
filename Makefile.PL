@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile
 (
           'PL_FILES' => {
-                          'JavaMap.PL' => 'lib/DateTime/TimeZone/HPUX/JavaMap.pm'
+                          'JavaMap.PL' => 'lib/DateTime/TimeZone/HPUX/Map.pm'
                         },
           'INSTALLDIRS' => 'site',
           'NAME' => 'DateTime::TimeZone::HPUX',

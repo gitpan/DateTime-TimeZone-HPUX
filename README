@@ -13,6 +13,14 @@ To install this module, run the following commands:
 	./Build test
 	./Build install
 
+Or if you don't have Module::Build:
+
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+
 SUPPORT AND DOCUMENTATION
 
 After installing, you can find documentation for this module with the
@@ -40,5 +48,5 @@ COPYRIGHT AND LICENCE
 Copyright (C) 2009 Olivier Mengué
 
 This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+under the same terms as Perl 5.10 itself.
 

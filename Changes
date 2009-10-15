@@ -1,13 +1,24 @@
 Revision history for DateTime-TimeZone-HPUX
 
-1.00    2009-10-14 19:00:00 +0200 (METDST)
+1.01    2009-10-15 19:33:00 +0200 (METDST)
+        Renammed private module DT::TZ::HPUX::JavaMap to DT::TZ::HPUX::Map.
+        Added POD to DT::TZ::HPUX::Map.
+        Improved documentation.
+        Fixed POD coverage test.
+        Fixed my build environment to get an UTF-8 META.yml.
+
+1.00    2009-10-14 19:37:00 +0200 (METDST)
         Now using Java to retrieve an hopefully complete mapping of tztab(4)
           names to Olson DB. See the 'Implementation' section in
           DateTime::TimeZone::HPUX for details.
         Added JavaMap.PL which extracts the mapping from the JRE at module
-          install time. A default map is bundled in case no JRE is found.
+          build time. A default map is bundled in case no JRE is found.
         In extreme cases, Java may be called at runtime for timezones which
-          were not known at install time.
+          were not known at build time.
+        Added code to DT::TZ::HPUX to provide a TimeZone factory interface.
+        This version was released on CPAN but not indexed due to an UTF-8
+          problem in META.yml (due to bug #25434 in the YAML module for
+          which I posted a patch 2 months ago). 
 
 0.09    2009-05-24
         Changed tests:

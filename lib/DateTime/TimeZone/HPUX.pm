@@ -5,7 +5,7 @@ package DateTime::TimeZone::HPUX;
 
 use Carp qw/carp croak/;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 our @JAVA_PATHS = (
     '/opt/java1.4',
@@ -69,11 +69,11 @@ sub _hpux_to_olson
 {
     my $tz = shift;
     local $@;
-    eval { require 'DateTime/TimeZone/HPUX/JavaMap.pm' };
+    eval { require 'DateTime/TimeZone/HPUX/Map.pm' };
     return undef if $@;
     my $tz_name;
-    if (exists $DateTime::TimeZone::HPUX::JavaMap::tz_map{$tz}) {
-        $tz_name = $DateTime::TimeZone::HPUX::JavaMap::tz_map{$tz};
+    if (exists $DateTime::TimeZone::HPUX::Map::tz_map{$tz}) {
+        $tz_name = $DateTime::TimeZone::HPUX::Map::tz_map{$tz};
     } else {
 
         # Simple TZ without DST: we can extract reliably an offset
@@ -92,7 +92,7 @@ sub _hpux_to_olson
         }
         if (defined $tz_name) {
             # Add to the cache
-            $DateTime::TimeZone::HPUX::JavaMap::tz_map{$tz} = $tz_name;
+            $DateTime::TimeZone::HPUX::Map::tz_map{$tz} = $tz_name;
         } else {
             return;
         }
@@ -131,11 +131,11 @@ DateTime::TimeZone::HPUX - Handles timezones defined at the operating system lev
 
 =head1 VERSION
 
-Version 1.00
+Version 1.01
 
 =head1 SYNOPSIS
 
-On an HP-UX system:
+On an HP-UX system (C<$^O eq 'hpux'>):
 
     my $tz =       DateTime::TimeZone->new(name => 'local');
 
@@ -144,13 +144,21 @@ On an HP-UX system:
 =head1 DESCRIPTION
 
 This distribution implement detection of the local timezone as defined at the
-operating system level, either in $ENV{TZ} or in /etc/TIMEZONE.
+operating system level, either in C<$ENV{TZ}> or in F</etc/TIMEZONE>.
 
 
 HP-UX has its own system for defining timezones. See tztab(4). This is
 incompatible with the now common set of timezones known as B<the Olson DB>
 that is used by L<DateTime::TimeZone>.
 This module fixes this hole by providing the map between the two systems.
+
+
+=head1 METHODS
+
+=head2 new(name => $hpux_style_time_zone)
+
+L<DateTime::TimeZone> factory. Throws an exception if the timezone name could
+not be resolved.
 
 =head1 IMPLEMENTATION
 
@@ -162,7 +170,7 @@ Environment:
 =item *
 
 this is the only such map available on HP-UX (the other map I know in
-/etc/dce_config doesn't uses Olson names)
+F</etc/dce_config> doesn't uses Olson names)
 
 =item *
 
@@ -178,17 +186,26 @@ you are not dependent on a new release from its maintainer.
 =back
 
 We are using the JRE at the module build time to generate a static Perl package
-L<DateTime::TimeZone::HPUX::JavaMap> that contains a map of the known
-timezones defined system wide (/usr/lib/tztab) to
+L<DateTime::TimeZone::HPUX::Map> that contains a map of the known
+timezones defined system wide (F</usr/lib/tztab>) to
 Olson DB style timezone names that are known to Java and DateTime::TimeZone.
 
 This extraction is done once for all at install time because JVM startup 
 is SLOOOOOW... 
 
 
-=head1 CAVEATS
+=head1 CAVEAT
 
 =over 4
+
+=item *
+
+This module uses a map of timezone names to return timezone objects from
+L<DateTime::TimeZone>. This implies that the TimeZone
+returned may not directly match the definition found in your F</usr/lib/tztab>
+or the timezone in your Java Runtime Environment.
+I consider this as a feature as DateTime::TimeZone is actively maintained,
+probaly much more than your local F<tztab>.
 
 =item *
 
@@ -216,15 +233,15 @@ The JRE may also be used at runtime in extreme cases:
 
 =over 4
 
-=item -
+=item *
 
 TZ environment variable is not set and /etc/TIMEZONE is not available as a
 fallback. The fix is to set $ENV{TZ}.
 
-=item -
+=item *
 
 the sources above are avaiable, but have a value that was unknown at the module
-build time (check L<DateTime::TimeZone::HPUX::JavaMap>). The fix is to rebuild
+build time (check L<DateTime::TimeZone::HPUX::Map>). The fix is to rebuild
 and reinstall the module (C<cpan force install DateTime::TimeZone::HPUX>).
 
 =back
@@ -244,7 +261,15 @@ L<DateTime::TimeZone::Local::hpux> - Local timezone detection for HP-UX
 
 =item *
 
+L<DateTime::TimeZone::HPUX::Map> - Local timezone mapping from HP-UX to Olson DB (generated at build time)
+
+=item *
+
 L<DateTime::TimeZone>
+
+=item *
+
+HP-UX Java Patches: L<http://docs.hp.com/en/HPUXJAVAPATCHES/>
 
 =back
 
@@ -300,9 +325,9 @@ Olivier MenguE<eacute>, C<< <dolmen at cpan.org> >>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Olivier MenguE<eacute>, all rights reserved.
+Copyright 2009 Olivier MenguE<eacute>.
 
 This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+under the same terms as Perl 5.10.0 itself.
 
 =cut
