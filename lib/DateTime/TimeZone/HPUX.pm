@@ -5,7 +5,7 @@ package DateTime::TimeZone::HPUX;
 
 use Carp qw/carp croak/;
 
-our $VERSION = '1.02';
+our $VERSION = '1.02_90';
 
 our @JAVA_PATHS = (
     '/opt/java1.4',
@@ -131,7 +131,7 @@ DateTime::TimeZone::HPUX - Handles timezones defined at the operating system lev
 
 =head1 VERSION
 
-Version 1.01
+Version 1.02_90
 
 =head1 SYNOPSIS
 

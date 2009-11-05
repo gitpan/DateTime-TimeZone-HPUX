@@ -5,6 +5,9 @@
 Build.PL
 Changes
 inc/DefaultMap.pm
+java/AllTZ.class
+java/AllTZ.java
+java/java-tz-chk
 java/Makefile
 java/map.sh
 java/TZ.java

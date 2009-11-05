@@ -35,6 +35,8 @@ my $java_map = $ARGV[0];
 my $tztab = @ARGV > 1 ? $ARGV[1] : '/usr/lib/tztab';
 
 
+print "Building map '$java_map'...\n";
+
 my %tz_olson_map;
 
 
@@ -64,6 +66,24 @@ my %tz_olson_map_builtin = (
     'PST-8PDT' => 'Asia/Singapore',
     # This was a bogus TZ according to tztab, same as EST5CDT
     'EST6CDT' => 'America/Indianapolis',
+    # FIXME Do more check on all the 13 following mappings
+    'CST6CDT#Indiana' => 'America/Indianapolis',
+    'EST5EDT#Indiana' => 'America/Indianapolis',
+    'MXST6MXDT' => 'America/Mexico_City',
+    # {{{ From http://beechglen.com/hpux/tztab2k7.txt
+    'MXST6MXDT#Mexico' => 'America/Mexico_City',
+    # Labrador
+    'AST4ADT#Canada' => 'America/Goose_Bay',
+    'CSM6CDM' => 'America/Mexico_City',
+    'CST6CDT#Mexico' => 'America/Mexico_City',
+    'MSM7MDM' => 'America/Chihuahua',
+    'MST7MDT#Mexico' => 'America/Chihuahua',
+    # Newfoundland
+    'NST3:30NDT#Canada' => 'America/St_Johns',
+    'PSM8PDM' => 'America/Tijuana',
+    'PST8PDT#Mexico' => 'America/Tijuana',
+    'WST-8WDT' => 'Australia/Perth',
+    # }}}
 );
 # Merge it
 @tz_olson_map{keys %tz_olson_map_builtin} = values %tz_olson_map_builtin;
@@ -79,7 +99,7 @@ if (-r $tztab) {
     # See: grep '^[A-Z#]' /usr/lib/tztab
     open TZTAB, '<', $tztab;
     while (<TZTAB>) {
-	next unless /^[A-Z]/;
+        next unless /^[A-Z]/;
         unless (/^(([A-Z]{3,})(?:-?[1-9]?\d(?::\d{2})?([A-Z]{3,})?)?(#\w+)?)/) {
             print "Ignoring $_";
             last
@@ -118,10 +138,10 @@ if (@tztab) {
             #my $tz_olson = DateTime::TimeZone::HPUX::_olson_from_java($tz);
             local $ENV{TZ} = $tz;
             my $tz_olson = qx!"$java_bin" -cp "lib/DateTime/TimeZone/HPUX" TZ!;
-	    chomp $tz_olson;
+            chomp $tz_olson;
             next unless defined $tz_olson;
             next unless $tz_olson =~ m!/!;
-	    print "  $tz: $tz_olson\n";
+            print "  $tz: $tz_olson\n";
             print "    (overrides our builtin value $tz_olson_map{$tz})\n" if exists $tz_olson_map{$tz} && $tz_olson ne $tz_olson_map{$tz};
             $tz_olson_map{$tz} = $tz_olson;
         }
@@ -131,6 +151,7 @@ if (@tztab) {
 
 } else {
     print "'$tztab' not found => skipped\n";
+    print "Using default map only.\n";
 }
 
 @tztab = sort grep { ! exists $tz_olson_map{$_} } @tztab;
@@ -146,8 +167,11 @@ if (@tztab) {
 foreach my $name (sort keys %tz_olson_map) {
     my $tz_olson = $tz_olson_map{$name};
     my $tz = eval { DateTime::TimeZone->new(name => $tz_olson); };
-    if ($@ || ! $tz->is_olson ) {
-        warn "Invalid TZ map value for $name: $tz_olson";
+    if ($@) {
+        warn "Invalid TZ map value for $name => $tz_olson: $@";
+        delete $tz_olson_map{$name};
+    } elsif (! defined($tz) || ! $tz->isa('DateTime::TimeZone') || ! $tz->is_olson ) {
+        warn "Invalid TZ map value for $name => $tz_olson";
         delete $tz_olson_map{$name};
     }
 }

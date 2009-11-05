@@ -1,5 +1,19 @@
 Revision history for DateTime-TimeZone-HPUX
 
+1.02_90 2009-11-05 20:35:00 +0200 (MET)
+        Added DateTime::TimeZone to build_requires.
+        Increased DateTime::TimeZone requirement to the latest version (0.99).
+        JavaMap.PL: improved diagnostics.
+        More release tests in t/version.t.
+        Marked tests local-METDST.t as TODO as they are failing on many
+          non-HPUX platforms and this test makes the assumption to be able to
+          fake the HP-UX environment.
+        Added built-in mappings for CST6CDT#Indiana, EST5EDT#Indiana,
+          MXST6MXDT, MXST6MXDT#Mexico, AST4ADT#Canada, CSM6CDM,
+          CSM6CDM#Mexico, MSM7MDM#Mexico, NST3:30NDT#Canada, PSM8PDM,
+          PST8PDT#Mexico, and WST-8WDT.
+        t/local-java.t is now run if JAVA_HOME is set.
+
 1.02    2009-10-15 19:55:00 +0200 (METDST)
         JavaMap.PL: fixed DefaultMap loading. Now tests pass on Win32 too.
 

@@ -1,10 +1,22 @@
+#!perl -w
+
 # Verifies that version numbers are matching POD.
 # This is a release test
 
+use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More;
 
-sub pod_version_ok
+
+sub package_to_pm($)
+{
+    my $module = shift;
+    $module =~ s{::}{/}g;
+    return "$module.pm";
+}
+
+
+sub pod_version_ok($)
 {
     my $perl_file = shift;
     my $in_pod = 0;
@@ -45,9 +57,31 @@ sub pod_version_ok
     }
 }
 
+sub Changes_ok($)
+{
+    my $package = shift;
+    require(package_to_pm($package));
+    my $version = $package->VERSION;
+    my $version_re = qr/^\Q$version\E\s+/;
+    my $ok = 0;
+
+    open(my $f, '<', 'Changes') or die $!;
+    while (<$f>) {
+        next unless /$version_re/;
+        $ok = 1;
+        last;
+    }
+    close $f;
+    ok($ok, "Changes recorded for this version $version");
+}
+
+
+plan tests => 4;
+
 pod_version_ok('lib/DateTime/TimeZone/HPUX.pm');
 pod_version_ok('lib/DateTime/TimeZone/Local/hpux.pm');
 pod_version_ok('lib/DateTime/TimeZone/HPUX/Map.pm');
+Changes_ok('DateTime::TimeZone::HPUX');
+
 
 # vim:set ts=4 et sw=4:
-

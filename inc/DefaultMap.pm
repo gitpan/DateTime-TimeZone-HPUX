@@ -1,19 +1,23 @@
 # Generated at install time by JavaMap.PL
-# /usr/bin/perl ./JavaMap.PL inc/DefaultMap.pm /usr/lib/tztab
+# /usr/bin/perl ./JavaMap.PL inc/DefaultMap.pm tztab
 use strict;
 use warnings;
 package DefaultMap;
 
-our $VERSION = '20091015.12';
+our $VERSION = '20091105.20';
 
 # Maps HP-UX timezone names to Olson DB names
 our %tz_map = (
     'AST10ADT' => 'America/Adak', 
     'AST4' => 'America/Guadeloupe', 
     'AST4ADT' => 'America/Halifax', 
+    'AST4ADT#Canada' => 'America/Goose_Bay', 
+    'CSM6CDM' => 'America/Mexico_City', 
     'CST-9:30CDT' => 'Australia/Adelaide', 
     'CST6CDT' => 'America/Chicago', 
     'CST6CDT#Canada' => 'America/Winnipeg', 
+    'CST6CDT#Indiana' => 'America/Indianapolis', 
+    'CST6CDT#Mexico' => 'America/Mexico_City', 
     'EAT-3' => 'Indian/Mayotte', 
     'EET-2EETDST' => 'Europe/Helsinki', 
     'EST-10EDT' => 'Australia/Sydney', 
@@ -23,6 +27,7 @@ our %tz_map = (
     'EST5CDT' => 'America/Indianapolis', 
     'EST5EDT' => 'America/New_York', 
     'EST5EDT#Canada' => 'America/Montreal', 
+    'EST5EDT#Indiana' => 'America/Indianapolis', 
     'EST5EST' => 'America/Indianapolis', 
     'EST6CDT' => 'America/Indianapolis', 
     'GAMT-9' => 'Pacific/Gambier', 
@@ -31,15 +36,22 @@ our %tz_map = (
     'MART-9:30' => 'Pacific/Marquesas', 
     'MET-1METDST' => 'Europe/Paris', 
     'MEZ-1MESZ' => 'Europe/Berlin', 
+    'MSM7MDM' => 'America/Chihuahua', 
     'MST7MDT' => 'America/Denver', 
     'MST7MDT#Canada' => 'America/Edmonton', 
+    'MST7MDT#Mexico' => 'America/Chihuahua', 
+    'MXST6MXDT' => 'America/Mexico_City', 
+    'MXST6MXDT#Mexico' => 'America/Mexico_City', 
     'NCT-11' => 'Pacific/Noumea', 
     'NST3:30NDT' => 'America/St_Johns', 
+    'NST3:30NDT#Canada' => 'America/St_Johns', 
     'NZST-12NZDT' => 'Pacific/Auckland', 
     'PMST3PMDT' => 'America/Miquelon', 
+    'PSM8PDM' => 'America/Tijuana', 
     'PST-8PDT' => 'Asia/Singapore', 
     'PST8PDT' => 'America/Los_Angeles', 
     'PST8PDT#Canada' => 'America/Vancouver', 
+    'PST8PDT#Mexico' => 'America/Tijuana', 
     'PWT0PST' => 'Europe/Lisbon', 
     'RET-4' => 'Indian/Reunion', 
     'SAST-2' => 'Africa/Johannesburg', 
@@ -54,6 +66,7 @@ our %tz_map = (
     'WST-5WSTDST' => 'Asia/Yekaterinburg', 
     'WST-6WSTDST' => 'Asia/Novosibirsk', 
     'WST-7WSTDST' => 'Asia/Krasnoyarsk', 
+    'WST-8WDT' => 'Australia/Perth', 
     'WST-8WSTDST' => 'Asia/Irkutsk', 
     'WST-9WSTDST' => 'Asia/Yakutsk', 
     'YST9YDT' => 'America/Anchorage',
@@ -68,7 +81,7 @@ DefaultMap - Mapping of HPUX timezones to DateTime::TimeZone names
 
 =head1 VERSION
 
-20091015.12
+20091105.20
 
 =head1 SYNOPSIS
 
@@ -85,9 +98,13 @@ The following mapping has been recorded:
     AST10ADT              America/Adak 
     AST4                  America/Guadeloupe 
     AST4ADT               America/Halifax 
+    AST4ADT#Canada        America/Goose_Bay 
+    CSM6CDM               America/Mexico_City 
     CST-9:30CDT           Australia/Adelaide 
     CST6CDT               America/Chicago 
     CST6CDT#Canada        America/Winnipeg 
+    CST6CDT#Indiana       America/Indianapolis 
+    CST6CDT#Mexico        America/Mexico_City 
     EAT-3                 Indian/Mayotte 
     EET-2EETDST           Europe/Helsinki 
     EST-10EDT             Australia/Sydney 
@@ -97,6 +114,7 @@ The following mapping has been recorded:
     EST5CDT               America/Indianapolis 
     EST5EDT               America/New_York 
     EST5EDT#Canada        America/Montreal 
+    EST5EDT#Indiana       America/Indianapolis 
     EST5EST               America/Indianapolis 
     EST6CDT               America/Indianapolis 
     GAMT-9                Pacific/Gambier 
@@ -105,15 +123,22 @@ The following mapping has been recorded:
     MART-9:30             Pacific/Marquesas 
     MET-1METDST           Europe/Paris 
     MEZ-1MESZ             Europe/Berlin 
+    MSM7MDM               America/Chihuahua 
     MST7MDT               America/Denver 
     MST7MDT#Canada        America/Edmonton 
+    MST7MDT#Mexico        America/Chihuahua 
+    MXST6MXDT             America/Mexico_City 
+    MXST6MXDT#Mexico      America/Mexico_City 
     NCT-11                Pacific/Noumea 
     NST3:30NDT            America/St_Johns 
+    NST3:30NDT#Canada     America/St_Johns 
     NZST-12NZDT           Pacific/Auckland 
     PMST3PMDT             America/Miquelon 
+    PSM8PDM               America/Tijuana 
     PST-8PDT              Asia/Singapore 
     PST8PDT               America/Los_Angeles 
     PST8PDT#Canada        America/Vancouver 
+    PST8PDT#Mexico        America/Tijuana 
     PWT0PST               Europe/Lisbon 
     RET-4                 Indian/Reunion 
     SAST-2                Africa/Johannesburg 
@@ -128,6 +153,7 @@ The following mapping has been recorded:
     WST-5WSTDST           Asia/Yekaterinburg 
     WST-6WSTDST           Asia/Novosibirsk 
     WST-7WSTDST           Asia/Krasnoyarsk 
+    WST-8WDT              Australia/Perth 
     WST-8WSTDST           Asia/Irkutsk 
     WST-9WSTDST           Asia/Yakutsk 
     YST9YDT               America/Anchorage

@@ -5,7 +5,7 @@ CLASS=TZ
 DIR=../lib/DateTime/TimeZone/HPUX
 TARGET=$(DIR)/$(CLASS).class
 
-all: $(TARGET)
+all: $(TARGET) AllTZ.class
 
 $(TARGET): $(CLASS).class
 	mkdir -p "$(DIR)"

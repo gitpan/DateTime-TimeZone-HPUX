@@ -4,7 +4,7 @@ use warnings;
 use Test::More;
 
 plan skip_all => "not HP-UX" unless $^O eq 'hpux';
-plan skip_all => "no Java" unless -x '/usr/bin/java';
+plan skip_all => "no Java" unless (-x '/usr/bin/java' || (exists $ENV{JAVA_HOME} && -x "$ENV{JAVA_HOME}/bin/java"));
 
 plan tests => 4;
 
@@ -21,7 +21,7 @@ $SIG{__WARN__} = sub {
     my $w = $_[0];
     #chomp $w;
     pass "Warning raised";
-    diag "Warn: $w";
+    diag "Expected warn: $w";
 };
 
 my $tz1 = DateTime::TimeZone->new( name => 'local' );
