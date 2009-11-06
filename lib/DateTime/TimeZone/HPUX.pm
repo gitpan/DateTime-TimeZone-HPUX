@@ -5,18 +5,40 @@ package DateTime::TimeZone::HPUX;
 
 use Carp qw/carp croak/;
 
-our $VERSION = '1.02_90';
+our $VERSION = '1.02_91';
 
-our @JAVA_PATHS = (
+our @JAVA_HOMES = (
     '/opt/java1.4',
 );
 
 {
     my $_java_bin;
+    sub _java_bin
+    {
+        return $_java_bin if defined $_java_bin;
+        $_java_bin = ''; # Default value: java not found (false)
+        foreach (
+                (map { ("$_/jre/bin/java", "$_/bin/java") }
+                     (exists $ENV{JAVA_HOME} ? ($ENV{JAVA_HOME}) : ()),
+                     @JAVA_HOMES,
+                ),
+                (map { "$_/java" } split(/:/, $ENV{PATH}) ),
+            ) {
+            next unless -x "$_";
+            $_java_bin = $_;
+            last;
+        }
+        return $_java_bin;
+    }
+}
+
+
+{
     my $_classes_dir;
 sub _olson_from_java
 {
     my $name;
+    my $java_bin = _java_bin();
     if (@_ && $_[0]) {
         $name = $_[0];
     }
@@ -28,23 +50,13 @@ sub _olson_from_java
         $pm = $INC{$pm};
         $_classes_dir = $pm;
         $_classes_dir =~ s/\.pm$//;
-        
-        foreach (
-                (map { "$_/bin/java" } (exists $ENV{JAVA_HOME} ? ("$ENV{JAVA_HOME}/bin/java") : ()),
-                                       @JAVA_PATHS),
-                (map { "$_/java" } split(/:/, $ENV{PATH}) )
-            ) {
-            next unless -x "$_";
-            $_java_bin = $_;
-            last;
-        }
     }
 
     unless (-r "$_classes_dir/TZ.class") {
         carp "Java class '$_classes_dir/TZ.class' not found.";
         return;
     }
-    unless ($_java_bin) {
+    unless ($java_bin) {
         carp "Java not found.";
         return;
     }
@@ -54,7 +66,7 @@ sub _olson_from_java
     {
         local $ENV{TZ};
         $ENV{TZ} = $name if defined $name;
-        $olson = qx!"$_java_bin" -cp "$_classes_dir" TZ!;
+        $olson = qx!"$java_bin" -cp "$_classes_dir" TZ!;
     }
     # Java returns "GMT" for unknown timezones
     return undef unless $olson =~ m!/!;
@@ -131,7 +143,7 @@ DateTime::TimeZone::HPUX - Handles timezones defined at the operating system lev
 
 =head1 VERSION
 
-Version 1.02_90
+Version 1.02_91
 
 =head1 SYNOPSIS
 

@@ -7,7 +7,7 @@ use Getopt::Long;
 use DateTime::TimeZone;
 
 my $verbose = 0;
-my $filter;
+my $filter = '';
 
 Getopt::Long::GetOptions(
     "v|verbose" => \$verbose,
@@ -28,10 +28,12 @@ while (my $name = <JAVA_TZ>) {
         warn "$name: $@";
     } elsif (! defined $tz) {
         warn "$name: undef\n";
-    } elsif ($tz->name ne $name) {
-        warn "$name: ".$tz->name."\n";
     } elsif ($verbose) {
-        print "$name: OK\n";
+        if ($tz->name ne $name) {
+            warn "$name: ".$tz->name."\n";
+        } else {
+            print "$name: OK\n";
+        }
     }
 }
 close JAVA_TZ;

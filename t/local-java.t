@@ -4,7 +4,11 @@ use warnings;
 use Test::More;
 
 plan skip_all => "not HP-UX" unless $^O eq 'hpux';
-plan skip_all => "no Java" unless (-x '/usr/bin/java' || (exists $ENV{JAVA_HOME} && -x "$ENV{JAVA_HOME}/bin/java"));
+
+use DateTime::TimeZone::HPUX;
+plan skip_all => "no Java" unless DateTime::TimeZone::HPUX::_java_bin();
+
+diag DateTime::TimeZone::HPUX::_java_bin();
 
 plan tests => 4;
 

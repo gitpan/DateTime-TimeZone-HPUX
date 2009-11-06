@@ -1,6 +1,11 @@
 Revision history for DateTime-TimeZone-HPUX
 
-1.02_90 2009-11-05 20:35:00 +0200 (MET)
+1.02_91 2009-11-06 21:32:00 +0100 (MET)
+        Improved failure capture in local-METDST.t.
+        Made Java bin path detection result available for tests.
+        Renamed @DateTime::TimeZone::HPUX::JAVA_PATHS to @JAVA_HOMES.
+
+1.02_90 2009-11-05 20:35:00 +0100 (MET)
         Added DateTime::TimeZone to build_requires.
         Increased DateTime::TimeZone requirement to the latest version (0.99).
         JavaMap.PL: improved diagnostics.
