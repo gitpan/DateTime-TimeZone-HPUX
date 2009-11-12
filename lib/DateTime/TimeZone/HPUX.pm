@@ -5,7 +5,7 @@ package DateTime::TimeZone::HPUX;
 
 use Carp qw/carp croak/;
 
-our $VERSION = '1.02_91';
+our $VERSION = '1.03';
 
 our @JAVA_HOMES = (
     '/opt/java1.4',
@@ -143,7 +143,7 @@ DateTime::TimeZone::HPUX - Handles timezones defined at the operating system lev
 
 =head1 VERSION
 
-Version 1.02_91
+Version 1.03
 
 =head1 SYNOPSIS
 
@@ -288,13 +288,17 @@ HP-UX Java Patches: L<http://docs.hp.com/en/HPUXJAVAPATCHES/>
 
 =head1 BUGS
 
-No known bug at this time. The module has an extensive test suite.
+No known bug at the time of release. The module has an extensive test suite.
 
 Please report any bugs or feature requests to C<bug-datetime-timezone-hpux at rt.cpan.org>,
 or through the web interface at
 L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DateTime-TimeZone-HPUX>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
+
+B<However, note that I, Olivier MenguE<eacute>, will not have access to an
+HP-UX system past November 30th, 2009. So do not expect any fixes unless you
+can provide patches yourself.>
 
 
 =head1 SUPPORT

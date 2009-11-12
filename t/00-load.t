@@ -2,10 +2,11 @@
 
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 BEGIN {
 	use_ok( 'DateTime::TimeZone::HPUX' );
+	use_ok( 'DateTime::TimeZone::HPUX::Map' );
 	use_ok( 'DateTime::TimeZone::Local::hpux' );
 }
 

@@ -14,11 +14,11 @@ my $build = Module::Build->new(
         # Minimum version required for this module to work is 0.87
         # But an out of date DateTime::Time is useless, so we force
         # an upgrade
-        'DateTime::TimeZone' => '>=0.99',
+        'DateTime::TimeZone' => '>=1.04',
         'Carp' => 0,
     },
     build_requires => {
-        'DateTime::TimeZone' => '>=0.99',
+        'DateTime::TimeZone' => '>=0.87',
         'Test::More' => 0,
         'File::Basename' => 0,
     },

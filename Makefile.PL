@@ -11,7 +11,7 @@ WriteMakefile
           'VERSION_FROM' => 'lib/DateTime/TimeZone/HPUX.pm',
           'PREREQ_PM' => {
                            'Test::More' => 0,
-                           'DateTime::TimeZone' => '>=0.99',
+                           'DateTime::TimeZone' => '>=0.87',
                            'File::Basename' => 0,
                            'Carp' => 0
                          }

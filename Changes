@@ -1,5 +1,11 @@
 Revision history for DateTime-TimeZone-HPUX
 
+1.03    2009-11-12 19:10:00 +0100 (MET)
+        Bumped version number.
+        Bumped DateTime::TimeZone requirement to the latest (1.04).
+        Announcing unmaintained mode as I won't have access to an HP-UX system
+          after 2009-11-30, so this is probably the last release.
+
 1.02_91 2009-11-06 21:32:00 +0100 (MET)
         Improved failure capture in local-METDST.t.
         Made Java bin path detection result available for tests.
