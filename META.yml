@@ -1,8 +1,8 @@
 ---
 name: DateTime-TimeZone-HPUX
-version: 1.03
+version: 1.04
 author:
-  - 'Olivier Mengué <dolmen@cpan.org>'
+  - 'Olivier MenguÃ© <dolmen@cpan.org>'
 abstract: Handles timezones defined at the operating system level on HP-UX
 license: perl
 resources:
@@ -13,13 +13,14 @@ build_requires:
   Test::More: 0
 requires:
   Carp: 0
-  DateTime::TimeZone: '>=1.04'
+  DateTime::TimeZone: '>=1.05'
 configure_requires:
   Module::Build: 0.35
+dynamic_config: 1
 provides:
   DateTime::TimeZone::HPUX:
     file: lib/DateTime/TimeZone/HPUX.pm
-    version: 1.03
+    version: 1.04
   DateTime::TimeZone::Local::hpux:
     file: lib/DateTime/TimeZone/Local/hpux.pm
 generated_by: Module::Build version 0.35

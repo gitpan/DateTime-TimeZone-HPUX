@@ -14,7 +14,7 @@ my $build = Module::Build->new(
         # Minimum version required for this module to work is 0.87
         # But an out of date DateTime::Time is useless, so we force
         # an upgrade
-        'DateTime::TimeZone' => '>=1.04',
+        'DateTime::TimeZone' => '>=1.05',
         'Carp' => 0,
     },
     build_requires => {
@@ -25,8 +25,8 @@ my $build = Module::Build->new(
     PL_files => {
         'JavaMap.PL' => 'lib/DateTime/TimeZone/HPUX/Map.pm',
     },
+    dynamic_config => 1,
     add_to_cleanup => [ 'cover_db', '*~', '.*~', 'Makefile', 'MANIFEST.bak' ],
-    create_makefile_pl => 'traditional',
 );
 # Install Java class files (lib/DateTime/TimeZone/HPUX/TZ.class)
 $build->add_build_element('class');
